@@ -82,8 +82,8 @@
             <!--End: content-section -->
 
             <!--Begin: tour-section -->
-            <div id="tour" class="tour-section">
-                <div class="content-section">
+            <div id="tour" class="tour-section" >
+                <div class="content-section overlay">
                     <h2 class="section-heading text-white">TOUR DATES</h2>
                     <p class="section-subheading text-white">Remember to book your tickets!</p>
                     
@@ -95,14 +95,14 @@
                     </ul>
 
                     <!-- Places -->
-                    <div class="row places-list">
+                    <div class="row places-list ">
                         <div class="col col-3 s-col-full mt-16">
                             <img src="./assets/img/pl1.jpg" alt="New York" class="places-img">
                             <div class="places-body">
                                 <h3 class="places-heading">New York</h3>
                                 <p class="places-time">Fri 27 Nov 2016</p>
                                 <p class="places-desc">Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
-                                <a href="#" class="btn s-col-width">Buy Tickets</a>
+                                <button class="btn s-col-width js-buy-ticket">Buy Tickets</button>
                             </div>
                         </div>
                         <div class="col col-3 s-col-full mt-16">
@@ -111,7 +111,7 @@
                                 <h3 class="places-heading">Paris</h3>
                                 <p class="places-time">Sat 28 Nov 2016</p>
                                 <p class="places-desc">Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
-                                <a href="#" class="btn s-col-width">Buy Tickets</a>
+                                <button class="btn s-col-width js-buy-ticket">Buy Tickets</button>
                             </div>
                         </div>
                         <div class="col col-3 s-col-full mt-16">
@@ -120,7 +120,7 @@
                                 <h3 class="places-heading">San Francisco</h3>
                                 <p class="places-time">Sun 29 Nov 2016</p>
                                 <p class="places-desc">Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
-                                <a href="#" class="btn s-col-width">Buy Tickets</a>
+                                <button class="btn s-col-width js-buy-ticket">Buy Tickets</button>
                             </div>
                         </div>
                     </div>
@@ -144,15 +144,15 @@
                         <form action="">
                             <div class="row">
                                 <div class="col s-col-full col-half">
-                                    <input type="text" name="" placeholder="Name" required id="" class="form-control">
+                                    <input type="text" name="" placeholder="Name" required id="contact-name" class="form-control">
                                 </div>
                                 <div class="col s-col-full s-mt-8 col-half">
-                                    <input type="email" name="" placeholder="Email" required id="" class="form-control">
+                                    <input type="email" name="" placeholder="Email" required id="contact-email" class="form-control">
                                 </div>
                             </div>
                             <div class="row mt-8">
                                 <div class="col col-full">
-                                    <input type="text" name="" placeholder="Message" required id="" class="form-control">
+                                    <input type="text" name="" placeholder="Message" required id="contact-message" class="form-control">
                                 </div>
                             </div>
                             <input class="contact-submit-btn btn pull-right mt-16 s-col-width" type="submit" value="SEND">
@@ -176,6 +176,44 @@
                 <a href=""><i class="ti-linkedin"></i></a>
             </div>
             <p class="copyright">Powered by <a href="" class=""> w3.css</a></p>
+        </div>
+
+    </div>
+
+    <div class="modal js-modal">
+        <div class="modal-container js-modal-container">
+            <div class="modal-close js-modal-close">
+                <i class="ti-close"></i>
+            </div>
+
+            <header class="modal-header">
+                <i class="ti-bag" style="margin-right: 16px;"></i>
+                Tickets
+            </header>
+
+            <div class="modal-body">
+                <label for="ticket-quantity" class="modal-lable">
+                    <i class="ti-shopping-cart-full"></i>
+                    Tickets, $15 per person
+                </label>
+                <input type="text" id="ticket-quantity" class="modal-input" placeholder="How many?">
+
+                <label for="ticket-email" class="modal-lable">
+                    <i class="ti-user"></i>
+                    Send to
+                </label>
+                <input type="email" id="ticket-email" class="modal-input" placeholder="Send mail">
+
+                <button id="buy-tickets">PAY
+                    <i class="ti-check"></i>
+                </button>
+            </div>
+
+            <footer class="modal-footer">
+                <div class="modal-help">
+                    Need <a href="">help?</a>
+                </div>
+            </footer>
         </div>
     </div>
 
@@ -207,6 +245,37 @@
 
             }
         }
+    </script>
+
+    <script>
+        const buyBtns = document.querySelectorAll('.js-buy-ticket')
+        const modal = document.querySelector('.js-modal')
+        const modalContainer = document.querySelector('.js-modal-container')
+        const modalClose = document.querySelector('.js-modal-close')
+
+        // hàm hiển thị modal mua vé (thêm class open vào modal)
+        function showBuyTicket() {
+            modal.classList.add('open')
+        }
+
+        // hàm ẩn modal mua vé (gỡ class open vào modal)
+        function hideBuyTickets () {
+            modal.classList.remove('open')
+        }
+
+        // lặp qua từng thẻ button và nghe hành vi click
+        for(const buyBtn of buyBtns ) {
+            buyBtn.addEventListener('click', showBuyTicket)
+        }
+
+        // nghe hành vi click vào button close
+        modalClose.addEventListener('click', hideBuyTickets)
+
+        modal.addEventListener('click', hideBuyTickets)
+
+        modalContainer.addEventListener('click', function(event){
+            event.stopPropagation()
+        })
     </script>
 </body>
 </html>
