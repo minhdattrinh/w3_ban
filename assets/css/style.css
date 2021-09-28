@@ -257,7 +257,7 @@ html {
 
 /* Tour section */
 .tour-section {
-    background-image: url(/assets/img/background_content.png);
+    background-image: url(../img/background_content.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
